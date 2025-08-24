@@ -22,3 +22,13 @@ Proyecto académico desarrollado en **ASP.NET Core MVC** con **Entity Framework 
 ---
 
 ## 📂 Estructura del proyecto
+aplicacionNomina.Core/
+├── Controllers/ # Controladores MVC
+├── Data/ # DbContext y configuración EF Core
+├── Models/ # Entidades del dominio
+├── Services/ # Lógica de negocio (ej. SalaryService)
+├── ViewModels/ # Clases auxiliares para vistas y dashboard
+├── Views/ # Vistas Razor (.cshtml)
+├── wwwroot/ # Archivos estáticos (css, js, bootstrap)
+└── Program.cs # Configuración principal
+

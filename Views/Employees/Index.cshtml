@@ -1,0 +1,62 @@
+@model IEnumerable<aplicacionNomina.Core.Models.Employee>
+@{
+    ViewData["Title"] = "Empleados";
+    var total = (int)(ViewBag.Total ?? 0);
+    var page = (int)(ViewBag.Page ?? 1);
+    var pageSize = (int)(ViewBag.PageSize ?? 20);
+    var q = (string)(ViewBag.Query ?? "");
+    var pages = (int)Math.Ceiling((double)total / pageSize);
+}
+<h3>Empleados</h3>
+<form method="get" class="row g-2 mb-3">
+    <div class="col-auto">
+        <input class="form-control" name="q" value="@q" placeholder="Buscar nombre/CI/correo"/>
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-outline-primary">Buscar</button>
+        <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th><th>CI</th><th>Nombre</th><th>Correo</th><th>Activo</th><th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var e in Model)
+    {
+        <tr>
+            <td>@e.EmpNo</td>
+            <td>@e.Ci</td>
+            <td>@e.NombreCompleto</td>
+            <td>@e.Correo</td>
+            <td>@(e.Activo ? "Sí" : "No")</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@e.EmpNo" class="btn btn-sm btn-outline-secondary">Ver</a>
+                <a asp-action="Edit" asp-route-id="@e.EmpNo" class="btn btn-sm btn-outline-primary">Editar</a>
+                <a asp-controller="DeptEmp" asp-action="Index" asp-route-empNo="@e.EmpNo" class="btn btn-sm btn-outline-dark">Deptos</a>
+                <a asp-controller="Salaries" asp-action="Index" asp-route-empNo="@e.EmpNo" class="btn btn-sm btn-outline-success">Salarios</a>
+                <form asp-action="Desactivar" asp-route-id="@e.EmpNo" method="post" class="d-inline">
+                    <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Desactivar empleado?')">Desactivar</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@if (pages > 1)
+{
+    <nav>
+        <ul class="pagination">
+            @for (int i = 1; i <= pages; i++)
+            {
+                <li class="page-item @(i==page?"active":"")">
+                    <a class="page-link" href="?page=@i&amp;q=@q">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}

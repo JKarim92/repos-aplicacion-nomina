@@ -1,0 +1,25 @@
+@model aplicacionNomina.Core.Models.Salary
+@{
+    ViewData["Title"] = "Nuevo salario";
+}
+<h3>Nuevo salario</h3>
+<form asp-action="Create" method="post" class="row g-3">
+    <input type="hidden" asp-for="EmpNo" />
+    <div class="col-md-4">
+        <label class="form-label">Monto</label>
+        <input asp-for="Amount" class="form-control" />
+        <span asp-validation-for="Amount" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Desde</label>
+        <input asp-for="FromDate" type="date" class="form-control" />
+        <span asp-validation-for="FromDate" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary">Guardar</button>
+    </div>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

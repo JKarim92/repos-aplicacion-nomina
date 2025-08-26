@@ -1,0 +1,28 @@
+@model IEnumerable<aplicacionNomina.Core.Models.Salary>
+@{
+    var emp = ViewBag.Emp as aplicacionNomina.Core.Models.Employee;
+    ViewData["Title"] = $"Salarios de {emp?.FirstName} {emp?.LastName} ({emp?.EmpNo})";
+}
+<h3>@ViewData["Title"]</h3>
+
+<p>
+    <a class="btn btn-primary"
+       asp-controller="Salaries"
+       asp-action="Create"
+       asp-route-empNo="@emp.EmpNo">Nuevo salario</a>
+</p>
+
+<table class="table table-striped">
+    <thead><tr><th>Monto</th><th>Desde</th><th>Hasta</th></tr></thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@s.Amount</td>
+                <td>@s.FromDate.ToString("yyyy-MM-dd")</td>
+                <td>@(s.ToDate?.ToString("yyyy-MM-dd") ?? "Vigente")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

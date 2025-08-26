@@ -1,0 +1,22 @@
+@model aplicacionNomina.Core.Models.Department
+@{
+    ViewData["Title"] = "Nuevo departamento";
+}
+<h3>Nuevo departamento</h3>
+<form asp-action="Create" method="post" class="row g-3">
+  <div class="col-md-2">
+    <label class="form-label">Dept No</label>
+    <input asp-for="DeptNo" class="form-control"/>
+    <span asp-validation-for="DeptNo" class="text-danger"></span>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Nombre</label>
+    <input asp-for="DeptName" class="form-control"/>
+    <span asp-validation-for="DeptName" class="text-danger"></span>
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+  </div>
+</form>
+@section Scripts{<partial name="_ValidationScriptsPartial"/>}

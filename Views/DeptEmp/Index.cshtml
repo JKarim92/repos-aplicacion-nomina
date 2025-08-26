@@ -1,0 +1,21 @@
+@model IEnumerable<aplicacionNomina.Core.Models.DeptEmp>
+@{
+    var emp = (aplicacionNomina.Core.Models.Employee)ViewBag.Emp;
+    ViewData["Title"] = "Deptos de " + emp.NombreCompleto;
+}
+<h3>Departamentos de @emp.NombreCompleto</h3>
+<a class="btn btn-primary mb-2" asp-action="Create" asp-route-empNo="@emp.EmpNo">Nueva asignación</a>
+<table class="table table-striped">
+    <thead><tr><th>Dept</th><th>Desde</th><th>Hasta</th></tr></thead>
+    <tbody>
+        @foreach(var d in Model)
+        {
+            <tr>
+                <td>@d.DeptNo</td>
+                <td>@d.FromDate.ToString("yyyy-MM-dd")</td>
+                <td>@(d.ToDate?.ToString("yyyy-MM-dd") ?? "-")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-controller="Employees" asp-action="Index" class="btn btn-secondary">Volver</a>
